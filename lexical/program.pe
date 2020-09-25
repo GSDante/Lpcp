@@ -4,4 +4,7 @@ program main
    int x ;
    x = 1;
    if(x > 0){print "ok!"}
+
+   float y;
+   y = 34.6;
 }

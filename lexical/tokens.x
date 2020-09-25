@@ -16,6 +16,7 @@ tokens :-
   "}"                                    { \s -> End}
   ";"                                    { \s -> SemiColon}
   int                                    { \s -> Type s}
+  float                                  { \s -> Type s}
   =                                      { \s -> Assign}
  "("				                             { \s -> BeginParenthesis}
   ")"				                             { \s -> EndParenthesis}
@@ -29,7 +30,9 @@ tokens :-
   "=="                                   { \s -> Equal}
   "!="                                   { \s -> Diff}
   "+"                                    { \s -> Sum}
+  for                                    { \s -> For}
   $digit+                                { \s -> Int (read s)} 
+  $digit+.$digit+                        { \s -> Float (read s)}
   $alpha [$alpha $digit \_ \']*          { \s -> Id s }
   \" $alpha [$alpha $digit ! \_ \']* \"  { \s -> String s}
 
@@ -55,9 +58,11 @@ data Token =
   Equal |
   Diff |
   Sum |
+  For|
   Type String |
   Id String |
   Int Int |
+  Float Float|
   String String
   deriving (Eq,Show)
 
