@@ -15,11 +15,13 @@ tokens :-
   "{"                                    { \s -> Begin}
   "}"                                    { \s -> End}
   ";"                                    { \s -> SemiColon}
+  ","                                    { \s -> Colon}
   int                                    { \s -> Type s}
   float                                  { \s -> Type s}
   bool                                   { \s -> Type s}
+  string                                 { \s -> Type s}
   =                                      { \s -> Assign}
- "("				                             { \s -> BeginParenthesis}
+  "("				                             { \s -> BeginParenthesis}
   ")"				                             { \s -> EndParenthesis}
   "["                                    { \s -> BeginIndex}
   "]"                                    { \s -> EndIndex}
@@ -42,9 +44,14 @@ tokens :-
   "%"                                    { \s -> Mod}
   "^"                                    { \s -> Pow}
   "/"                                    { \s -> Div}
+  "OR"                                   { \s -> Or }
+  "AND"                                   { \s -> And }
   for                                    { \s -> For}
+  do                                     { \s -> Do }
   $digit+                                { \s -> Int (read s)} 
   $digit+.$digit+                        { \s -> Float (read s)}
+  "True"                                 { \s -> Bool (read s) }
+  "False"                                { \s -> Bool (read s) }
   $alpha+[$alpha $digit \_ \']*          { \s -> Id s }
   \" $alpha [$alpha $digit ! \_ \']* \"  { \s -> String s}
 {
@@ -58,6 +65,7 @@ data Token =
   BeginParenthesis |
   EndParenthesis |
   SemiColon |
+  Colon |
   Assign    | 
   If  |
   Else |
@@ -78,9 +86,12 @@ data Token =
   Mod|
   Multi|
   Pow|
+  Or |
+  And |
   For|
   While|
   Func|
+  Do |
   Type String |
   Id String |
   Array String|
