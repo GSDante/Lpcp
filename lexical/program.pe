@@ -7,4 +7,21 @@ program main
 
    float y;
    y = 34.6;
-}
+
+   int z;
+   z = 13 + 40.3;
+   z = 50 * 20;
+
+   int v[20];
+
+   for(int i = 0; i < 20 ; i+=1){
+   		v[i] +=10;
+   		if( v[i] > 30){
+   			v[i] -= 10;
+   		}
+   	}
+
+   	while(x^2 > 1000){
+   		x-=20;
+   	}
+ }

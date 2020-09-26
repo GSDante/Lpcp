@@ -20,9 +20,12 @@ tokens :-
   =                                      { \s -> Assign}
  "("				                             { \s -> BeginParenthesis}
   ")"				                             { \s -> EndParenthesis}
+  "["                                    { \s -> BeginIndex}
+  "]"                                    { \s -> EndIndex}
   if                                     { \s -> If}
   else                                   { \s -> Else}
   print                                  { \s -> Print}
+  while                                  { \s -> While}
   >                                      { \s -> Greater}
   "<"                                    { \s -> Less}
   ">="                                   { \s -> GreaterOrEqual}
@@ -30,10 +33,17 @@ tokens :-
   "=="                                   { \s -> Equal}
   "!="                                   { \s -> Diff}
   "+"                                    { \s -> Sum}
+  "+="                                   { \s -> Increment}
+  "-="                                   { \s -> Decrement}
+  "-"                                    { \s -> Sub}
+  "*"                                    { \s -> Multi}
+  "%"                                    { \s -> Mod}
+  "^"                                    { \s -> Pow}
+  "/"                                    { \s -> Div}
   for                                    { \s -> For}
   $digit+                                { \s -> Int (read s)} 
   $digit+.$digit+                        { \s -> Float (read s)}
-  $alpha [$alpha $digit \_ \']*          { \s -> Id s }
+  $alpha+[$alpha $digit \_ \']*          { \s -> Id s }
   \" $alpha [$alpha $digit ! \_ \']* \"  { \s -> String s}
 
 {
@@ -52,15 +62,26 @@ data Token =
   Else |
   Print |
   Greater |
+  BeginIndex|
+  EndIndex|
+  Increment |
+  Decrement|
   GreaterOrEqual |
   Less|
   LessOrEqual |
   Equal |
   Diff |
   Sum |
+  Sub|
+  Div|
+  Mod|
+  Multi|
+  Pow|
   For|
+  While|
   Type String |
   Id String |
+  Array String|
   Int Int |
   Float Float|
   String String
