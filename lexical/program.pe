@@ -15,13 +15,31 @@ program main
    int v[20];
 
    for(int i = 0; i < 20 ; i+=1){
-   		v[i] +=10;
-   		if( v[i] > 30){
-   			v[i] -= 10;
-   		}
-   	}
+      v[i] +=10;
+      if( v[i] > 30){
+         v[i] -= 10;
+      }
+   }
 
-   	while(x^2 > 1000){
-   		x-=20;
-   	}
- }
+   while(x^2 > 1000){
+      x-=20;
+   }
+
+   int a;
+   int b;
+   int c;
+   a = 0;
+   b = 6;
+   c = 5;
+
+   do {
+      a += 1;
+   } while(a != b OR a != c);
+   
+
+   bool w;
+   w = True;
+
+
+
+}

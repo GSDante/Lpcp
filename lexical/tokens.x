@@ -17,8 +17,9 @@ tokens :-
   ";"                                    { \s -> SemiColon}
   int                                    { \s -> Type s}
   float                                  { \s -> Type s}
+  bool                                   { \s -> Type s}
   =                                      { \s -> Assign}
- "("				                             { \s -> BeginParenthesis}
+  "("				                             { \s -> BeginParenthesis}
   ")"				                             { \s -> EndParenthesis}
   "["                                    { \s -> BeginIndex}
   "]"                                    { \s -> EndIndex}
@@ -40,12 +41,17 @@ tokens :-
   "%"                                    { \s -> Mod}
   "^"                                    { \s -> Pow}
   "/"                                    { \s -> Div}
+  "OR"                                   { \s -> Or }
+  "&&"                                   { \s -> And }
   for                                    { \s -> For}
+  do                                     { \s -> Do }
   $digit+                                { \s -> Int (read s)} 
   $digit+.$digit+                        { \s -> Float (read s)}
+  "True"                                 { \s -> Bool (read s) }
+  "False"                                { \s -> Bool (read s) }
   $alpha+[$alpha $digit \_ \']*          { \s -> Id s }
   \" $alpha [$alpha $digit ! \_ \']* \"  { \s -> String s}
-
+  
 {
 -- Each action has type :: String -> Token
 
@@ -77,13 +83,17 @@ data Token =
   Mod|
   Multi|
   Pow|
+  Or |
+  And |
   For|
   While|
+  Do |
   Type String |
   Id String |
   Array String|
   Int Int |
   Float Float|
+  Bool Bool |
   String String
   deriving (Eq,Show)
 
