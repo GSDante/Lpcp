@@ -17,6 +17,7 @@ tokens :-
   ";"                                    { \s -> SemiColon}
   int                                    { \s -> Type s}
   float                                  { \s -> Type s}
+  bool                                   { \s -> Type s}
   =                                      { \s -> Assign}
  "("				                             { \s -> BeginParenthesis}
   ")"				                             { \s -> EndParenthesis}
@@ -26,6 +27,7 @@ tokens :-
   else                                   { \s -> Else}
   print                                  { \s -> Print}
   while                                  { \s -> While}
+  func                                   { \s -> Func}
   >                                      { \s -> Greater}
   "<"                                    { \s -> Less}
   ">="                                   { \s -> GreaterOrEqual}
@@ -45,7 +47,6 @@ tokens :-
   $digit+.$digit+                        { \s -> Float (read s)}
   $alpha+[$alpha $digit \_ \']*          { \s -> Id s }
   \" $alpha [$alpha $digit ! \_ \']* \"  { \s -> String s}
-
 {
 -- Each action has type :: String -> Token
 
@@ -79,11 +80,13 @@ data Token =
   Pow|
   For|
   While|
+  Func|
   Type String |
   Id String |
   Array String|
   Int Int |
   Float Float|
+  Bool Bool |
   String String
   deriving (Eq,Show)
 
