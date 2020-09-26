@@ -69,9 +69,12 @@ program main
    b = 6;
    c = 5;
 
+   b /= 2;
+
    do {
-      a += 1;
+      a *= 2;
    } while(a != b OR a != c);
+   
    
 
    bool w;

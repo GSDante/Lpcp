@@ -39,6 +39,8 @@ tokens :-
   "+"                                    { \s -> Sum}
   "+="                                   { \s -> Increment}
   "-="                                   { \s -> Decrement}
+  "*="                                   { \s -> MultEqual}
+  "/="                                   { \s -> DivEqual}
   "-"                                    { \s -> Sub}
   "*"                                    { \s -> Multi}
   "%"                                    { \s -> Mod}
@@ -75,6 +77,8 @@ data Token =
   EndIndex|
   Increment |
   Decrement|
+  MultEqual |
+  DivEqual |
   GreaterOrEqual |
   Less|
   LessOrEqual |
